@@ -24,15 +24,19 @@ SOFTWARE.
 #ifndef REGEX_H
 #define REGEX_H
 
-#include <QString>
+#include <QPair>
+#include <QList>
+#include "charset.h"
 
 class Regex
 {
 public:
     Regex();
 
+    enum RepeatMode {EXACTLY_ONCE, AT_LEAST_ONCE, ANY};
+    using RegexMember = QPair<CharSet, RepeatMode>;
 private:
-    QString regex; //temporary
+    QList<RegexMember> rules;
 };
 
 #endif // REGEX_H
