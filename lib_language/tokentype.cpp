@@ -27,3 +27,9 @@ TokenType::TokenType()
 {
 
 }
+
+QJsonObject TokenType::toJson() const {
+    QJsonObject result;
+    result["regex"] = regex.toJson();
+    result["name"] = name;
+}

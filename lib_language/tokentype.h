@@ -25,15 +25,17 @@ SOFTWARE.
 #define TOKENTYPE_H
 
 #include <QString>
+#include <QJsonObject>
+#include "regex.h"
 
 class TokenType
 {
 public:
     TokenType();
-
+    QJsonObject toJson() const;
 private:
     QString name;
-    //Regex regex;
+    Regex regex;
 };
 
 #endif // TOKENTYPE_H

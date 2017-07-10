@@ -44,7 +44,7 @@ QString Regex::repeatModeToString(RepeatMode s) {
     }
 }
 
-QJsonArray Regex::toJson() {
+QJsonArray Regex::toJson() const {
     /* Utility for converting a member to an object */
     const static auto ruleToJson = [](const Regex::RegexMember& rule) -> QJsonValue {
         QJsonObject item;

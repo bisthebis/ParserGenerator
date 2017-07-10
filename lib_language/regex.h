@@ -38,7 +38,7 @@ public:
     static QString repeatModeToString(RepeatMode s);
     using RegexMember = QPair<CharSet, RepeatMode>;
 
-    QJsonArray toJson();
+    QJsonArray toJson() const;
 private:
     QList<RegexMember> rules;
 };
