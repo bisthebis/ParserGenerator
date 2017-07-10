@@ -31,17 +31,28 @@ class CharSet
 {
 public:
     enum PredefinedSets {LOWER_ALPHA, UPPER_ALPHA, DIGITS};
-    enum SetType {UNION, SINGLETON, PREDEFINED};
+    static QString predefinedSetToString(PredefinedSets s);
 
-    CharSet(QString name, QChar character);
-    CharSet(QString name, QString lhs, QString rhs);
+    enum SetType {UNION, SINGLETON, PREDEFINED};
+    static QString setTypeToString(SetType s);
+
+    CharSet(QString _name, QChar character);
+    CharSet(QString _name, QString _lhs, QString _rhs);
+
+    QString name() const {return _name;}
+    SetType type() const {return _type;}
+    PredefinedSets predefined() const {return _predefined;}
+    QChar value() const {return _value;}
+    QString lhs() const {return _lhs;}
+    QString rhs() const {return _rhs;}
+
 
 private:
-    QString name;
-    PredefinedSets predefined; //If it's predefined, which one it is
-    SetType type;
-    QChar value; //For singleton set
-    QString lhs, rhs; //For union. Names of the sets used.
+    QString _name;
+    PredefinedSets _predefined; //If it's predefined, which one it is
+    SetType _type;
+    QChar _value; //For singleton set
+    QString _lhs, _rhs; //For union. Names of the sets used.
 
     CharSet(QString n, PredefinedSets s);
 

@@ -23,14 +23,43 @@ SOFTWARE.
 */
 #include "charset.h"
 
-CharSet::CharSet(QString name, QChar character) : name(name), type(CharSet::SINGLETON) {
+CharSet::CharSet(QString name, QChar character) : _name(name), _type(CharSet::SINGLETON) {
 
 }
 
-CharSet::CharSet(QString name, QString lhs, QString rhs) : name(name), type(CharSet::UNION), lhs(lhs), rhs(rhs) {
+CharSet::CharSet(QString name, QString lhs, QString rhs) : _name(name), _type(CharSet::UNION), _lhs(lhs), _rhs(rhs) {
 
 }
 
-CharSet::CharSet(QString n, PredefinedSets s) : name(n), type(CharSet::PREDEFINED), predefined(s)  {
+CharSet::CharSet(QString n, PredefinedSets s) : _name(n), _type(CharSet::PREDEFINED), _predefined(s)  {
 
 }
+
+QString CharSet::predefinedSetToString(PredefinedSets s) {
+    switch (s) {
+    case LOWER_ALPHA:
+        return "LOWER_ALPHA";
+        break;
+    case UPPER_ALPHA:
+        return "UPPER_ALPHA";
+        break;
+    default:
+        return "DIGITS";
+        break;
+    }
+}
+
+QString CharSet::setTypeToString(SetType s) {
+    switch (s) {
+    case UNION:
+        return "UNION";
+        break;
+    case PREDEFINED:
+        return "PREDEFINED";
+        break;
+    default:
+        return "SINGLETON";
+        break;
+    }
+}
+

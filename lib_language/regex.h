@@ -26,6 +26,7 @@ SOFTWARE.
 
 #include <QPair>
 #include <QList>
+#include <QJsonArray>
 #include "charset.h"
 
 class Regex
@@ -34,7 +35,10 @@ public:
     Regex();
 
     enum RepeatMode {EXACTLY_ONCE, AT_LEAST_ONCE, ANY};
+    static QString repeatModeToString(RepeatMode s);
     using RegexMember = QPair<CharSet, RepeatMode>;
+
+    QJsonArray toJson();
 private:
     QList<RegexMember> rules;
 };

@@ -22,8 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 #include "regex.h"
+#include <QJsonObject>
+#include <QJsonValue>
 
 Regex::Regex()
 {
 
+}
+
+QString Regex::repeatModeToString(RepeatMode s) {
+    switch (s) {
+    case EXACTLY_ONCE:
+        return "EXACTLY_ONCE";
+        break;
+    case AT_LEAST_ONCE:
+        return "AT_LEAST_ONCE";
+        break;
+    default:
+        return "ANY";
+        break;
+    }
+}
+
+QJsonArray Regex::toJson() {
+    /* Utility for converting a member to an object */
+    const static auto ruleToJson = [](const Regex::RegexMember& rule) -> QJsonValue {
+        QJsonObject item;
+        item["set"] = rule.first.name();
+        item["mode"] = repeatModeToString(rule.second);
+        return QJsonValue(item);
+    };
+
+    QJsonArray result;
+    for (const auto& e : rules)
+        result.append(ruleToJson(e));
+
+    return result;
 }
