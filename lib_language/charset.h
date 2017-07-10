@@ -26,6 +26,7 @@ SOFTWARE.
 
 #include <QChar>
 #include <QString>
+#include <QScopedPointer>
 
 class CharSet
 {
@@ -36,8 +37,11 @@ public:
     enum SetType {UNION, SINGLETON, PREDEFINED};
     static QString setTypeToString(SetType s);
 
+    static const CharSet lower_alpha, upper_alpha, digits, alpha, alphanum;
+
     CharSet(QString _name, QChar character);
     CharSet(QString _name, QString _lhs, QString _rhs);
+    CharSet(QString n, PredefinedSets s);
 
     QString name() const {return _name;}
     SetType type() const {return _type;}
@@ -54,7 +58,7 @@ private:
     QChar _value; //For singleton set
     QString _lhs, _rhs; //For union. Names of the sets used.
 
-    CharSet(QString n, PredefinedSets s);
+
 
 };
 

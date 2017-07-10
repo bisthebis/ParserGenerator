@@ -59,3 +59,7 @@ QJsonArray Regex::toJson() const {
 
     return result;
 }
+
+void Regex::pushRule(RegexMember rule){
+    rules.append(rule);
+}

@@ -23,7 +23,7 @@ SOFTWARE.
 */
 #include "tokentype.h"
 
-TokenType::TokenType()
+TokenType::TokenType(QString name, Regex regex) : name(name), regex(regex)
 {
 
 }
@@ -32,4 +32,5 @@ QJsonObject TokenType::toJson() const {
     QJsonObject result;
     result["regex"] = regex.toJson();
     result["name"] = name;
+    return result;
 }

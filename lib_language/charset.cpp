@@ -23,6 +23,14 @@ SOFTWARE.
 */
 #include "charset.h"
 
+/* Definitions of global predefiend sets */
+const CharSet CharSet::lower_alpha("lower_alpha", CharSet::LOWER_ALPHA);
+const CharSet CharSet::upper_alpha("upper_alpha", CharSet::UPPER_ALPHA);
+const CharSet CharSet::digits("lower_alpha", CharSet::DIGITS);
+const CharSet CharSet::alpha("alpha", "lower_alpha", "upper_alpha");
+const CharSet CharSet::alphanum("alphanum", "alpha", "digits");
+
+
 CharSet::CharSet(QString name, QChar character) : _name(name), _type(CharSet::SINGLETON) {
 
 }

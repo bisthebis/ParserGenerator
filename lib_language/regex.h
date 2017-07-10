@@ -39,6 +39,7 @@ public:
     using RegexMember = QPair<CharSet, RepeatMode>;
 
     QJsonArray toJson() const;
+    void pushRule(RegexMember rule);
 private:
     QList<RegexMember> rules;
 };

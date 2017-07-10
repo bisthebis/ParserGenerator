@@ -31,7 +31,7 @@ SOFTWARE.
 class TokenType
 {
 public:
-    TokenType();
+    TokenType(QString name, Regex regex);
     QJsonObject toJson() const;
 private:
     QString name;
