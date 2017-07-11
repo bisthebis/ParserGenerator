@@ -26,7 +26,7 @@ SOFTWARE.
 
 #include <QChar>
 #include <QString>
-#include <QScopedPointer>
+#include <QJsonObject>
 
 class CharSet
 {
@@ -49,7 +49,7 @@ public:
     QChar value() const {return _value;}
     QString lhs() const {return _lhs;}
     QString rhs() const {return _rhs;}
-
+    QJsonObject toJson();
 
 private:
     QString _name;

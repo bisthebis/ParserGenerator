@@ -71,3 +71,22 @@ QString CharSet::setTypeToString(SetType s) {
     }
 }
 
+QJsonObject CharSet::toJson() {
+    QJsonObject result;
+
+    result["name"] = this->name();
+    result["type"] = this->setTypeToString(type());
+    switch (type()) {
+    case PREDEFINED:
+        result["set"] = this->predefinedSetToString(predefined());
+        break;
+    case UNION:
+        result["lhs"] = lhs();
+        result["lhs"] = lhs();
+        break;
+    default: //Singleton
+        result["character"] = value();
+    }
+
+    return result;
+}
