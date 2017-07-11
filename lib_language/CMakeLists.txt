@@ -1,7 +1,6 @@
 find_package(Qt5Core REQUIRED)
 
-add_executable(lib_language
-    main.cpp
+add_library(lib_language
     regex.cpp regex.h
     tokentype.cpp tokentype.h
     charset.cpp charset.h
