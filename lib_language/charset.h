@@ -33,9 +33,11 @@ class CharSet
 public:
     enum PredefinedSets {LOWER_ALPHA, UPPER_ALPHA, DIGITS};
     static QString predefinedSetToString(PredefinedSets s);
+    static PredefinedSets parsePredefinedSet(QString s);
 
     enum SetType {UNION, SINGLETON, PREDEFINED};
     static QString setTypeToString(SetType s);
+    static SetType parseSetType(QString s);
 
     static const CharSet lower_alpha, upper_alpha, digits, alpha, alphanum;
 

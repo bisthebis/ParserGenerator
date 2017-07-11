@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 #include "charset.h"
+#include <QtGlobal>
 
 /* Definitions of global predefiend sets */
 const CharSet CharSet::lower_alpha("lower_alpha", CharSet::LOWER_ALPHA);
@@ -41,6 +42,17 @@ CharSet::CharSet(QString name, QString lhs, QString rhs) : _name(name), _type(Ch
 
 CharSet::CharSet(QString n, PredefinedSets s) : _name(n), _type(CharSet::PREDEFINED), _predefined(s)  {
 
+}
+
+CharSet::PredefinedSets CharSet::parsePredefinedSet(QString s) {
+    if (s == "LOWER_ALPHA")
+        return LOWER_ALPHA;
+    if (s == "UPPER_ALPHA")
+        return UPPER_ALPHA;
+    if (s == "DIGITS")
+        return DIGITS;
+    else
+        qFatal(QString("Unpable to parse \"Predefined set\" : %1").arg(s).toStdString().c_str());
 }
 
 QString CharSet::predefinedSetToString(PredefinedSets s) {
@@ -69,6 +81,17 @@ QString CharSet::setTypeToString(SetType s) {
         return "SINGLETON";
         break;
     }
+}
+
+CharSet::SetType CharSet::parseSetType(QString s) {
+    if (s == "UNION")
+        return UNION;
+    if (s == "PREDEFINED")
+        return PREDEFINED;
+    if (s == "SINGLETON")
+        return SINGLETON;
+    else
+        qFatal(QString("Unpable to parse \"SetType\" : %1").arg(s).toStdString().c_str());
 }
 
 QJsonObject CharSet::toJson() const {
