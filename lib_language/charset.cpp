@@ -26,7 +26,7 @@ SOFTWARE.
 /* Definitions of global predefiend sets */
 const CharSet CharSet::lower_alpha("lower_alpha", CharSet::LOWER_ALPHA);
 const CharSet CharSet::upper_alpha("upper_alpha", CharSet::UPPER_ALPHA);
-const CharSet CharSet::digits("lower_alpha", CharSet::DIGITS);
+const CharSet CharSet::digits("digits", CharSet::DIGITS);
 const CharSet CharSet::alpha("alpha", "lower_alpha", "upper_alpha");
 const CharSet CharSet::alphanum("alphanum", "alpha", "digits");
 
@@ -71,7 +71,7 @@ QString CharSet::setTypeToString(SetType s) {
     }
 }
 
-QJsonObject CharSet::toJson() {
+QJsonObject CharSet::toJson() const {
     QJsonObject result;
 
     result["name"] = this->name();
@@ -85,7 +85,7 @@ QJsonObject CharSet::toJson() {
         result["lhs"] = lhs();
         break;
     default: //Singleton
-        result["character"] = value();
+        result["character"] = QString(value());
     }
 
     return result;

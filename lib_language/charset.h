@@ -49,7 +49,7 @@ public:
     QChar value() const {return _value;}
     QString lhs() const {return _lhs;}
     QString rhs() const {return _rhs;}
-    QJsonObject toJson();
+    QJsonObject toJson() const;
 
 private:
     QString _name;
