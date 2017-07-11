@@ -7,7 +7,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib_language)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-add_executable(language_designer main.cpp)
+add_executable(language_designer main.cpp mainwindow.h mainwindow.cpp mainwindow.ui)
 
 target_link_libraries (language_designer lib_language)
 target_link_libraries (language_designer Qt5::Core)

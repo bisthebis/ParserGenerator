@@ -1,5 +1,7 @@
 #include <iostream>
 #include <QtCore>
+#include <QApplication>
+#include "mainwindow.h"
 #include "tokentype.h"
 #include "language.h"
 
@@ -14,7 +16,7 @@ int main(int argc, char** argv) {
     auto idObject = lang.toJson();
     QByteArray data = QJsonDocument(idObject).toJson();
 
-    QCoreApplication app(argc, argv);
+    QApplication app(argc, argv);
     QFile file("out.json");
     QTextStream ss(&file);
     if(!file.open(QIODevice::WriteOnly))
@@ -23,6 +25,8 @@ int main(int argc, char** argv) {
         return 1;
     }
     ss << QString::fromLatin1(data);
-    QTimer::singleShot(200,  [&](){qDebug() << "Leaving"; app.quit();});
+    MainWindow window;
+    window.show();
+
     return app.exec();
 }
