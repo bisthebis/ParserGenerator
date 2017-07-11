@@ -31,10 +31,11 @@ SOFTWARE.
 class TokenType
 {
 public:
-    TokenType(QString name, Regex regex);
+    TokenType(QString _name, Regex regex);
     QJsonObject toJson() const;
+    QString name() const {return _name;}
 private:
-    QString name;
+    QString _name;
     Regex regex;
 };
 

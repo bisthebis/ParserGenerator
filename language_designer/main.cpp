@@ -1,14 +1,17 @@
 #include <iostream>
 #include <QtCore>
 #include "tokentype.h"
+#include "language.h"
 
 int main(int argc, char** argv) {
+    Language lang;
     Regex regex;
     regex.pushRule({CharSet::alpha, Regex::AT_LEAST_ONCE});
     regex.pushRule({CharSet::alphanum, Regex::ANY});
     TokenType id("identifier", regex);
+    lang.pushTokenType(id);
 
-    auto idObject = id.toJson();
+    auto idObject = lang.toJson();
     QByteArray data = QJsonDocument(idObject).toJson();
 
     QCoreApplication app(argc, argv);

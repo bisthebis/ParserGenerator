@@ -21,16 +21,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#ifndef LANGUAGE_H
+#define LANGUAGE_H
+
 #include "tokentype.h"
+#include <QString>
+#include <QMap>
+#include <QJsonObject>
 
-TokenType::TokenType(QString name, Regex regex) : _name(name), regex(regex)
+
+/** @brief Serializable data-structure representing a language, which is a set (actually a map) of TokenTypes and
+ *   optional new "Charsets" (Predefined sets are included in default constructed languages)
+ *
+ *
+ * */
+class Language
 {
+public:
+    Language();
+    void pushTokenType(const TokenType& t);
+    void pushCharSet(const CharSet& s);
+    QJsonObject toJson();
+private:
+    QMap<QString, TokenType> tokens;
+    QMap<QString, CharSet> charSets;
+};
 
-}
-
-QJsonObject TokenType::toJson() const {
-    QJsonObject result;
-    result["regex"] = regex.toJson();
-    result["name"] = _name;
-    return result;
-}
+#endif // LANGUAGE_H

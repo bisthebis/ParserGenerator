@@ -21,16 +21,46 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "tokentype.h"
+#include "language.h"
+#include <QJsonArray>
+#include <QJsonObject>
 
-TokenType::TokenType(QString name, Regex regex) : _name(name), regex(regex)
+Language::Language()
 {
-
+    pushCharSet(CharSet::upper_alpha);
+    pushCharSet(CharSet::lower_alpha);
+    pushCharSet(CharSet::digits);
+    pushCharSet(CharSet::alpha);
+    pushCharSet(CharSet::alphanum);
 }
 
-QJsonObject TokenType::toJson() const {
+void Language::pushTokenType(const TokenType &t) {
+    //Since TokenTypes are not default constructible, operator [] can't be used.
+    tokens.insert(t.name(), t);
+}
+
+void Language::pushCharSet(const CharSet &s) {
+    //Since CharSets are not default constructible, operator [] can't be used.
+    charSets.insert(s.name(), s);
+}
+
+QJsonObject Language::toJson() {
+    //The document is a single object containing charsets and tokentypes arrays
     QJsonObject result;
-    result["regex"] = regex.toJson();
-    result["name"] = _name;
+
+    QJsonArray JsonCharSets;
+    for (const auto& set : charSets) {
+        JsonCharSets.append(set.toJson());
+    }
+    result["sets"] = JsonCharSets;
+
+    QJsonArray JsonTokenTypes;
+    for (const auto& type : tokens) {
+        JsonTokenTypes.append(type.toJson());
+    }
+
+    result["sets"] = JsonCharSets;
+    result["types"] = JsonTokenTypes;
+
     return result;
 }
