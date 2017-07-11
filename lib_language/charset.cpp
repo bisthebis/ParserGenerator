@@ -82,7 +82,7 @@ QJsonObject CharSet::toJson() const {
         break;
     case UNION:
         result["lhs"] = lhs();
-        result["lhs"] = lhs();
+        result["rhs"] = rhs();
         break;
     default: //Singleton
         result["character"] = QString(value());
